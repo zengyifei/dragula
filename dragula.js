@@ -27,6 +27,11 @@ function dragula (initialContainers, options) {
   var _grabbed; // holds mousedown context until first mousemove
 
   var o = options || {};
+  // specify the document object
+  if (o.doc !== void 0) {
+    doc = o.doc;
+    documentElement = doc.documentElement;
+  }
   if (o.moves === void 0) { o.moves = always; }
   if (o.accepts === void 0) { o.accepts = always; }
   if (o.invalid === void 0) { o.invalid = invalidTarget; }
@@ -155,9 +160,9 @@ function dragula (initialContainers, options) {
     if (drake.dragging && _mirror) {
       return;
     }
-    if (isContainer(item)) {
-      return; // don't drag container itself
-    }
+    // if (isContainer(item)) {
+    //   return; // don't drag container itself
+    // }
     var handle = item;
     while (getParent(item) && isContainer(getParent(item)) === false) {
       if (o.invalid(item, handle)) {
